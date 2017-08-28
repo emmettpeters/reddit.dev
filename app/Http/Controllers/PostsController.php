@@ -16,7 +16,10 @@ class PostsController extends Controller
      */
     public function index()
     {
-        echo "this is the index";
+        $posts = \App\Models\Post::paginate(4);
+        $data['posts']= $posts;
+        return view('posts.index',$data);
+
     }
 
     /**
@@ -37,7 +40,20 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+
+        $this->validate($request, \App\Models\Post::$rules);
+
+        $title = $request->input('title');
+        $content = $request->input('content');
+        $url = $request->input('url');
+        $post = new \App\Models\Post();
+        $post->title = $title;
+        $post->content = $content;
+        $post->url = $url;
+        $post->user_id = 1;
+        $post->save();
+
+        return redirect()->action('PostsController@index');
     }
 
     /**
@@ -48,7 +64,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = \App\Models\Post::find($id);
+        $data['post'] = $post;
+        return view('posts.show',$data);
     }
 
     /**
@@ -59,8 +77,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $data['id']= $id;
-
+        $post = \App\Models\Post::find($id);
+        $data['post'] = $post;
         return view('posts.edit',$data);
     }
 
@@ -73,7 +91,17 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "updated succesfully!";
+
+        $this->validate($request, \App\Models\Post::$rules);
+
+        $post = \App\Models\Post::find($id);
+        $post->title = $request->title;
+        $post->content =$request->content;
+        $post->url =$request->url;
+        $post->user_id = 1;
+        $post->save();
+
+        return \Redirect::action('PostsController@show', $post->id);
     }
 
     /**
@@ -84,8 +112,8 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        echo "$id has been destroyed";
-        $data['id']= $id;
+        $post = \App\Models\Post::find($id);
+        $post->delete();
         return redirect()->action('PostsController@index');
     }
 }
