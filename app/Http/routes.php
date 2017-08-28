@@ -20,6 +20,9 @@ Route::get('/lowercase/{string}','HomeController@lowercase');
 Route::get('/increment/{number}','HomeController@increment');
 Route::get('/add/{number}/{number2}','HomeController@add');
 Route::get('/rolldice/{guess}', 'HomeController@rolldice');
+Route::get('/zero', 'HomeController@resetToZero');
+Route::resource('posts', 'PostsController');
+
 
 // Route::get('/uppercase/{string}', function ($string) {
 // 	$upString = strtoupper($string);
@@ -30,7 +33,7 @@ Route::get('/rolldice/{guess}', 'HomeController@rolldice');
 // Route::get('/lowercase/{string}', function ($string) {
 // 	$lowString = strtolower($string);
 // 	$data['lowString']=$lowString;
-//     return view('lowercase',$data);
+//     return view('lowercase',$data);cre
 // });
 
 // Route::get('/increment/{number}', function ($number) {
@@ -47,9 +50,4 @@ Route::get('/rolldice/{guess}', 'HomeController@rolldice');
 //     return view('rolldice', $data);
 // });
  
- 
- 
- 
- 
- Route::get('/rolldice/{guess}', 'HomeController@rolldice');
  

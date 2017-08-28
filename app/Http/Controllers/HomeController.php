@@ -23,14 +23,17 @@ class HomeController extends Controller
 	}
 
 	public function increment($number){
-		if($number > 5)
-		{
-			$data['number'] = 0;
-			return view('increment',$data);
+		if($number > 5) {
+			return redirect()->action('HomeController@resetToZero');
 		} else {
 	    	$data['number'] = $number + 1;
 	    	return view('increment',$data);
 		}
+	}
+
+	public function resetToZero(){
+		$data['number'] = 0;
+		return view('increment')->with($data);
 	}
 }
 
