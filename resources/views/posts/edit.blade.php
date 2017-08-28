@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-
 	<main class="container">
         <h1>Edit a post here</h1>
         <form method="POST" action="{{ action('PostsController@update', $post->id )}}">
@@ -26,5 +25,4 @@
         </form>
 
     </main>
-
 @stop

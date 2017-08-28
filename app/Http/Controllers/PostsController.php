@@ -53,6 +53,8 @@ class PostsController extends Controller
         $post->user_id = 1;
         $post->save();
 
+        $request->session()->flash('successMessage', 'Post created');
+
         return redirect()->action('PostsController@index');
     }
 
@@ -91,6 +93,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
 
         $this->validate($request, \App\Models\Post::$rules);
 
@@ -101,6 +104,8 @@ class PostsController extends Controller
         $post->user_id = 1;
         $post->save();
 
+        $request->session()->flash('successMessage', 'Post updated');
+
         return \Redirect::action('PostsController@show', $post->id);
     }
 
@@ -110,10 +115,13 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+
         $post = \App\Models\Post::find($id);
         $post->delete();
+
+        $request->session()->flash('successMessage', 'Post deleted');
         return redirect()->action('PostsController@index');
     }
 }
