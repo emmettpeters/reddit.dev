@@ -17,9 +17,13 @@ class DatabaseSeeder extends Seeder
         // $this->command->info('Deleting users records');
         // There are also comment() and error() methods that output different colors
 
-        // DB::table('users')->delete();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::table('posts')->truncate();
+        DB::table('users')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         $this->call('UsersTableSeeder');
+        $this->call('PostsTableSeeder');
 
         Model::reguard();
     }
