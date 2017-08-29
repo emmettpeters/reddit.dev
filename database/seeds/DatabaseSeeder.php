@@ -14,7 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        // $this->command->info('Deleting users records');
+        // There are also comment() and error() methods that output different colors
+
+        // DB::table('users')->delete();
+
+        $this->call('UsersTableSeeder');
 
         Model::reguard();
     }

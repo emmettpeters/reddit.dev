@@ -22,32 +22,3 @@ Route::get('/add/{number}/{number2}','HomeController@add');
 Route::get('/rolldice/{guess}', 'HomeController@rolldice');
 Route::get('/zero', 'HomeController@resetToZero');
 Route::resource('posts', 'PostsController');
-
-
-// Route::get('/uppercase/{string}', function ($string) {
-// 	$upString = strtoupper($string);
-// 	$data['upString']=$upString;
-//     return view('uppercase',$data);
-// });
-
-// Route::get('/lowercase/{string}', function ($string) {
-// 	$lowString = strtolower($string);
-// 	$data['lowString']=$lowString;
-//     return view('lowercase',$data);cre
-// });
-
-// Route::get('/increment/{number}', function ($number) {
-//     return $number + 1;
-// });
-
-// Route::get('/add/{number}/{number2}', function ($number1,$number2) {
-//     return $number1 + $number2;
-// });
-
-// Route::get('/rolldice/{guess}', function ($guess) {
-// 	$data['rand'] = rand(1,6);
-// 	$data['guess']= $guess;
-//     return view('rolldice', $data);
-// });
- 
- 
