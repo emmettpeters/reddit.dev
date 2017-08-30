@@ -14,8 +14,15 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+	header('Location:/posts');
+    // return view('welcome');
 });
+
+Route::resource('posts', 'PostsController');
+
+// Route::get('/auth/logout',function(){
+// 	Auth::logout();
+// });
 // Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -31,9 +38,3 @@ Route::get('/increment/{number}','HomeController@increment');
 Route::get('/add/{number}/{number2}','HomeController@add');
 Route::get('/rolldice/{guess}', 'HomeController@rolldice');
 Route::get('/zero', 'HomeController@resetToZero');
-Route::resource('posts', 'PostsController');
-
-Route::get('/auth/logout',function(){
-	Auth::logout();
-	header('Location:/auth/login');
-});
