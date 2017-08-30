@@ -13,13 +13,13 @@
 
 
 
-Route::get('/', function () {
-	header('Location:/posts');
-    // return view('welcome');
-});
+//Route::get('/', function () {
+// 	header('Location:/posts');
+//     // return view('welcome');
+// }); 
 
 Route::resource('posts', 'PostsController');
-
+Route::get('/usersposts/{number}','PostsController@usersposts');
 // Route::get('/auth/logout',function(){
 // 	Auth::logout();
 // });
@@ -38,3 +38,14 @@ Route::get('/increment/{number}','HomeController@increment');
 Route::get('/add/{number}/{number2}','HomeController@add');
 Route::get('/rolldice/{guess}', 'HomeController@rolldice');
 Route::get('/zero', 'HomeController@resetToZero');
+
+
+
+
+
+
+
+
+
+
+

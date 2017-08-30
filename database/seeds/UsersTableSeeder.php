@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
             $users[] = [
                 'name'=> $faker->name,
                 'email'=> $faker->email,
-                'password'=> Hash::make($faker->password),
+                'password'=> $faker->password,
                 'created_at'=> $faker->dateTime(),
                 'updated_at'=> $faker->dateTime()
             ];

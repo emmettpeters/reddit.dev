@@ -12,15 +12,15 @@
 
 </head>
 <body>
+{{-- @include('layouts.partials._navbar') --}}
 	<nav class="navbar navbar-inverse bg-inverse" style="display:flex;justify-content:space-around;">
     <a class="navbar-brand" href="#">Reddthat</a>
-    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@index')}}" class="nav">Index</a>
+    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@index')}}" class="nav">All Posts</a>
 
   @if(Auth::check() === false)
     <a style="padding-top:.9%" class="nav-link" href="{{action('Auth\AuthController@getRegister')}}" class="nav">Register</a>
     <a style="padding-top:.9%" class="nav-link" href="{{action('Auth\AuthController@getLogin')}}" class="nav">Login</a>
-  @endif
-  @if(Auth::check() === true)
+  @else
     <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Create Ad</a>
     <a style="padding-top:.9%" class="nav-link" href="{{ action('Auth\AuthController@getLogout') }}" class="nav">Logout</a>
   @endif

@@ -2,22 +2,17 @@
 
 @section('title')
 
-<title>All Posts</title>
+<title>Users Posts</title>
 
 @stop
 
 @section('content')
 
 	<main class="container">
-        @if (session()->has('successMessage'))
-            <div class="alert alert-success">{{ session('successMessage') }}</div>
-        @elseif (session()->has('errorMessage'))
-            <div class="alert alert-error">{{ session('errorMessage') }}</div>
-        @endif
 
-        <h1>All Posts</h1>
+        <h1>All User's Posts</h1>
         
-        {!! $posts->render() !!}
+        {{-- {!! $posts->render() !!} --}}
         
         @foreach($posts as $post)
         
@@ -25,7 +20,6 @@
             <p>{{$post->content}}</p>
             <p>{{$post->url}}</p>
             <p>{{$post->created_at }}</p>
-            <p>{{$post->user->name }}</p>
             <a href="{{ action('PostsController@show', $post->id)}}">Link</a>
 
         @endforeach

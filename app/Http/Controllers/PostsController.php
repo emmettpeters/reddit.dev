@@ -8,13 +8,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Log;
+use App\User;
 
 class PostsController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    
+    public function __construct()
+    {
+        $this->middleware('auth',['except' => ['index','show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +24,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(4);
+        $posts = Post::with('user')->paginate(4);
         $data['posts']= $posts;
         return view('posts.index',$data);
 
@@ -57,8 +59,9 @@ class PostsController extends Controller
         $post->url = $url;
         $post->user_id = \Auth::id();
         $post->save();
-        
+
         $request->session()->flash('successMessage', 'Post created');
+
         Log::info("$title, $content, $url");
 
         return redirect()->action('PostsController@index');
@@ -82,6 +85,19 @@ class PostsController extends Controller
         return view('posts.show',$data);
     }
 
+    public function usersposts($id)
+    {   
+        if(User::find($id) ===null)
+        {
+            abort(404);
+        };
+
+        $posts = User::find($id)->posts;
+
+        $data['posts'] = $posts;
+        return view('posts.usersposts',$data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -92,12 +108,16 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
 
-        if(!$post){
-            abort(404);
+        if(\Auth::id() == $post->user_id){ 
+            if(!$post){
+                abort(404);
+            }
+            $data['post'] = $post;
+            return view('posts.edit',$data);
+        } else {
+            $data=[];
+            header('Location:/posts');
         }
-
-        $data['post'] = $post;
-        return view('posts.edit',$data);
     }
 
     /**
