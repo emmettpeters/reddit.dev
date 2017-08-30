@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
 class PostsTableSeeder extends Seeder
 {
@@ -11,8 +12,7 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-
-        DB::table('posts')->delete();
+        
         
         $posts = [];
 
@@ -25,7 +25,8 @@ class PostsTableSeeder extends Seeder
                 'url'=> $faker->url,
                 'content'=> $faker->text,
                 'created_at'=> $faker->dateTime(),
-                'updated_at'=> $faker->dateTime()
+                'updated_at'=> $faker->dateTime(),
+                'user_id' => User::all()->random()->id
             ];
         }
         DB::table('posts')->insert($posts);

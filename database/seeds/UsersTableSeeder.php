@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,7 +13,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('users')->delete();
+        $user= new User();
+        $user->name = 'emmett';
+        $user->email='ejp8611@gmail.com';
+        $user->password = Hash::make(env('USER_PASSWORD'));
+        $user->save();
 
         $users = [];
 
@@ -23,7 +28,7 @@ class UsersTableSeeder extends Seeder
             $users[] = [
                 'name'=> $faker->name,
                 'email'=> $faker->email,
-                'password'=> $faker->password,
+                'password'=> Hash::make($faker->password),
                 'created_at'=> $faker->dateTime(),
                 'updated_at'=> $faker->dateTime()
             ];
