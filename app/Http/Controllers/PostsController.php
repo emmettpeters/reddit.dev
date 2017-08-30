@@ -11,6 +11,10 @@ use Log;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -51,7 +55,7 @@ class PostsController extends Controller
         $post->title = $title;
         $post->content = $content;
         $post->url = $url;
-        $post->user_id = 1;
+        $post->user_id = Auth::id();
         $post->save();
 
         $request->session()->flash('successMessage', 'Post created');

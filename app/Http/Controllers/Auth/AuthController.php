@@ -10,6 +10,12 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+
+
+    //redirect on login
+    protected $redirectPath = "/posts";
+
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller

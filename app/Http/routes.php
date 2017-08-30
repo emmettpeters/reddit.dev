@@ -16,6 +16,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// Login routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/uppercase/{string}','HomeController@uppercase');
 Route::get('/lowercase/{string}','HomeController@lowercase');
@@ -24,3 +32,8 @@ Route::get('/add/{number}/{number2}','HomeController@add');
 Route::get('/rolldice/{guess}', 'HomeController@rolldice');
 Route::get('/zero', 'HomeController@resetToZero');
 Route::resource('posts', 'PostsController');
+
+Route::get('/auth/logout',function(){
+	Auth::logout();
+	header('Location:/auth/login');
+});

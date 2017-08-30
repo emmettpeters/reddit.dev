@@ -15,12 +15,21 @@
 	<nav class="navbar navbar-inverse bg-inverse" style="display:flex;justify-content:space-around;">
     <a class="navbar-brand" href="#">Reddthat</a>
     <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@index')}}" class="nav">Index</a>
+
+  @if(Auth::check() === false)
+    <a style="padding-top:.9%" class="nav-link" href="{{action('Auth\AuthController@getRegister')}}" class="nav">Register</a>
+    <a style="padding-top:.9%" class="nav-link" href="{{action('Auth\AuthController@getLogin')}}" class="nav">Login</a>
+  @endif
+  @if(Auth::check() === true)
     <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Create Ad</a>
-    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Register</a>
-    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Login</a>
-    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Logout</a>
+    <a style="padding-top:.9%" class="nav-link" href="{{ action('Auth\AuthController@getLogout') }}" class="nav">Logout</a>
+  @endif
 
   </nav>
+
+
+  {{ (Auth::check()) ? "User Is Logged IN" : "User is logged OUT" }}
+  {{Auth::user()}}
 
 	@yield('content')
 
