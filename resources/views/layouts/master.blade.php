@@ -12,9 +12,14 @@
 
 </head>
 <body>
-	<nav>
-    <a href="{{action('PostsController@index')}}" class="nav">Index</a>
-    <a href="{{action('PostsController@create')}}" class="nav">Create Ad</a>
+	<nav class="navbar navbar-inverse bg-inverse" style="display:flex;justify-content:space-around;">
+    <a class="navbar-brand" href="#">Reddthat</a>
+    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@index')}}" class="nav">Index</a>
+    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Create Ad</a>
+    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Register</a>
+    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Login</a>
+    <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@create')}}" class="nav">Logout</a>
+
   </nav>
 
 	@yield('content')

@@ -29,5 +29,6 @@ class PostsTableSeeder extends Seeder
             ];
         }
         DB::table('posts')->insert($posts);
+        
     }
 }

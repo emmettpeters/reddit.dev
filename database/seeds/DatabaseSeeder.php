@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('posts')->truncate();
         DB::table('users')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
 
         $this->call('UsersTableSeeder');
         $this->call('PostsTableSeeder');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         Model::reguard();
     }
