@@ -29,7 +29,7 @@ class Post extends BaseModel
                     ->orWhere('content','like','%'. $q .'%')
                     ->orWhere('url','like','%'. $q .'%')
                     ->orWhereHas('user',function($query) use ($q){$query->where('name','like',"%$q%");})
-                    ->paginate(4);
+                    ->paginate(6);
         return $posts;
     }
 

@@ -8,7 +8,7 @@
 
 @section('content')
 
-	<main class="container">
+	<main class="container" style="margin-top: 3em;">
         <h1><ul>Single Post</ul></h1>
 
         @if(Auth::id()==$post->user_id)

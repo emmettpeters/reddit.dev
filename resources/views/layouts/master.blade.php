@@ -13,7 +13,7 @@
 </head>
 <body>
 {{-- @include('layouts.partials._navbar') --}}
-	<nav class="navbar navbar-inverse bg-inverse" style="display:flex;justify-content:space-around;">
+	<nav class="navbar navbar-inverse bg-inverse" style="z-index:20;width:100%;position:fixed;display:flex;justify-content:space-around;">
     <a class="navbar-brand" href="#">Reddthat</a>
     <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@index')}}" class="nav">All Posts</a>
     <form style="padding-top:.7%" action="{{action('PostsController@index')}}">

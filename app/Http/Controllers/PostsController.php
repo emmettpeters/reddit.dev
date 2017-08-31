@@ -30,7 +30,7 @@ class PostsController extends Controller
             $q = $request->q;
             $posts = POST::search($q);    
         } else {
-            $posts = Post::with('user')->paginate(4);  
+            $posts = Post::with('user')->paginate(6);  
         }
 
 
@@ -133,11 +133,13 @@ class PostsController extends Controller
         $post = Post::find($id);
         $user_id = \Auth::id();
         $post_id = Post::find($id)->user_id;
-        $vote = new Vote;
-        $vote->user_id = $user_id;
-        $vote->post_id = $post_id;
-        $vote->vote = 1;
-        $vote->save();
+        if(empty(Vote::where('id',$id)->where('user_id',$user_id)->get())){
+            $vote = new Vote;
+            $vote->user_id = $user_id;
+            $vote->post_id = $post_id;
+            $vote->vote = 1;
+            $vote->save();
+        };
 
         $data['post'] = $post;
         return view('posts.show',$data);
