@@ -23,8 +23,8 @@
         @foreach($posts as $post)
         
             <h1>{{$post->title}}<br>
-            <a href="/votes/1"><span class="glyphicon glyphicon-thumbs-up"></span></a></h1>
-            {{-- <a href="/votes/-1"><span class="glyphicon glyphicon-thumbs-down"></span></a> --}}
+            <a href="{{action('PostsController@upvote',$post->id)}}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+            <a href="{{action('PostsController@downvote',$post->id)}}"><span class="glyphicon glyphicon-thumbs-down"></span></a></h1>
             <p>{{$post->content}}</p>
             <p>{{$post->url}}</p>
             <p>{{$post->created_at }}</p>
