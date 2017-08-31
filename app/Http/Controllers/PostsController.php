@@ -7,24 +7,33 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Vote;
 use Log;
 use App\User;
+use DB;
 
 class PostsController extends Controller
 {
     
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['index','show','postsBuilder']]);
+        $this->middleware('auth',['except' => ['index','show']]);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('user')->paginate(4);
+        if($request->has('q')){
+            $q = $request->q;
+            $posts = POST::search($q);    
+        } else {
+            $posts = Post::with('user')->paginate(4);  
+        }
+
+
         $data['posts']= $posts;
         return view('posts.index',$data);
 
@@ -115,9 +124,23 @@ class PostsController extends Controller
             $data['post'] = $post;
             return view('posts.edit',$data);
         } else {
-            $data=[];
             header('Location:/posts');
         }
+    }
+
+    public function upvote($id)
+    {
+        $post = Post::find($id);
+        $user_id = \Auth::id();
+        $post_id = Post::find($id)->user_id;
+        $vote = new Vote;
+        $vote->user_id = $user_id;
+        $vote->post_id = $post_id;
+        $vote->vote = 1;
+        $vote->save();
+
+        $data['post'] = $post;
+        return view('posts.show',$data);
     }
 
     /**
@@ -167,11 +190,4 @@ class PostsController extends Controller
         return redirect()->action('PostsController@index');
     }
 
-    public function postsBuilder()
-    {   $search = ($_GET['postSearch']);
-        $data = [];
-        $posts = Post::where('title','like','%' . $search .'%')->get();
-        $data['posts'] = $posts;
-        return view('posts.index',$data);
-    }
 }

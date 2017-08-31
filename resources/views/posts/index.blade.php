@@ -16,17 +16,20 @@
         @endif
 
         <h1>All Posts</h1>
-        
-        {{-- {!! $posts->render() !!} --}}
+        @if(empty($_GET))
+            {!! $posts->render() !!}
+        @endif
         
         @foreach($posts as $post)
         
-            <h1>{{$post->title}}</h1>
+            <h1>{{$post->title}}<br>
+            <a href="/votes/1"><span class="glyphicon glyphicon-thumbs-up"></span></a></h1>
+            {{-- <a href="/votes/-1"><span class="glyphicon glyphicon-thumbs-down"></span></a> --}}
             <p>{{$post->content}}</p>
             <p>{{$post->url}}</p>
             <p>{{$post->created_at }}</p>
             <p>{{$post->user->name }}</p>
-            <a href="{{ action('PostsController@show', $post->id)}}">Link</a>
+            <a href="{{ action('PostsController@show', $post->id)}}">See More</a>
 
         @endforeach
     </main>

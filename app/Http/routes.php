@@ -19,7 +19,9 @@ Route::get('/', function () {
 
 Route::resource('posts', 'PostsController');
 Route::get('/usersposts/{number}','PostsController@usersposts');
-Route::get('/builder', 'PostsController@postsBuilder');
+Route::get('/upvote/{id}','PostsController@upvote');
+Route::get('/downvote/{id}','PostsController@downvote');
+
  
 // Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

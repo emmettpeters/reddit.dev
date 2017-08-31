@@ -16,8 +16,8 @@
 	<nav class="navbar navbar-inverse bg-inverse" style="display:flex;justify-content:space-around;">
     <a class="navbar-brand" href="#">Reddthat</a>
     <a style="padding-top:.9%" class="nav-link" href="{{action('PostsController@index')}}" class="nav">All Posts</a>
-    <form action="/builder">
-      <input name="postSearch" placeholder="Search all posts">
+    <form style="padding-top:.7%" action="{{action('PostsController@index')}}">
+      <input name="q" placeholder="Search all posts">
     </form>
   @if(Auth::check() === false)
     <a style="padding-top:.9%" class="nav-link" href="{{action('Auth\AuthController@getRegister')}}" class="nav">Register</a>
