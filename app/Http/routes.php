@@ -13,16 +13,14 @@
 
 
 
-//Route::get('/', function () {
-// 	header('Location:/posts');
-//     // return view('welcome');
-// }); 
+Route::get('/', function () {
+	header('Location:/posts');
+}); 
 
 Route::resource('posts', 'PostsController');
 Route::get('/usersposts/{number}','PostsController@usersposts');
-// Route::get('/auth/logout',function(){
-// 	Auth::logout();
-// });
+Route::get('/builder', 'PostsController@postsBuilder');
+ 
 // Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

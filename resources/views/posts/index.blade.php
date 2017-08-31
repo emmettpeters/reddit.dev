@@ -17,7 +17,7 @@
 
         <h1>All Posts</h1>
         
-        {!! $posts->render() !!}
+        {{-- {!! $posts->render() !!} --}}
         
         @foreach($posts as $post)
         

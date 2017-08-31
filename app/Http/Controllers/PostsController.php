@@ -15,7 +15,7 @@ class PostsController extends Controller
     
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['index','show']]);
+        $this->middleware('auth',['except' => ['index','show','postsBuilder']]);
     }
     /**
      * Display a listing of the resource.
@@ -165,5 +165,13 @@ class PostsController extends Controller
         $post->delete();
         $request->session()->flash('successMessage', 'Post deleted');
         return redirect()->action('PostsController@index');
+    }
+
+    public function postsBuilder()
+    {   $search = ($_GET['postSearch']);
+        $data = [];
+        $posts = Post::where('title','like','%' . $search .'%')->get();
+        $data['posts'] = $posts;
+        return view('posts.index',$data);
     }
 }
