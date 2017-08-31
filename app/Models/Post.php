@@ -25,7 +25,11 @@ class Post extends BaseModel
 
     public static function search($q)
     {
-        $posts = Post::where('title','like','%'. $q .'%')->orWhere('content','like','%'. $q .'%')->get();
+        $posts = Post::where('title','like','%'. $q .'%')
+                    ->orWhere('content','like','%'. $q .'%')
+                    ->orWhere('url','like','%'. $q .'%')
+                    ->orWhereHas('user',function($query) use ($q){$query->where('name','like',"%$q%");})
+                    ->paginate(4);
         return $posts;
     }
 

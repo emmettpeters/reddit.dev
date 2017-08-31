@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::resource('posts', 'PostsController');
 Route::get('/usersposts/{number}','PostsController@usersposts');
+
+// Post vote routes
 Route::get('/upvote/{id}','PostsController@upvote');
 Route::get('/downvote/{id}','PostsController@downvote');
 

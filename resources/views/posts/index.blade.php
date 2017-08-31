@@ -16,20 +16,19 @@
         @endif
 
         <h1>All Posts</h1>
-        @if(empty($_GET))
-            {!! $posts->render() !!}
-        @endif
+        
+        {!! $posts->appends(Request::except('page'))->render() !!}
+    
         
         @foreach($posts as $post)
         
-            <h1>{{$post->title}}<br>
+            <h1><a href="{{ action('PostsController@show', $post->id)}}">{{$post->title}}</a><br>
             <a href="{{action('PostsController@upvote',$post->id)}}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
             <a href="{{action('PostsController@downvote',$post->id)}}"><span class="glyphicon glyphicon-thumbs-down"></span></a></h1>
             <p>{{$post->content}}</p>
             <p>{{$post->url}}</p>
             <p>{{$post->created_at }}</p>
             <p>{{$post->user->name }}</p>
-            <a href="{{ action('PostsController@show', $post->id)}}">See More</a>
 
         @endforeach
     </main>
